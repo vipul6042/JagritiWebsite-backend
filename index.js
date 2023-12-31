@@ -1,14 +1,15 @@
-// server.js
-const express = require('express');
+import express from 'express'
+import dotenv from "dotenv"
+import cors from 'cors'
+import connectdb from './db/connectdb.js';
+
+dotenv.config();
 const app = express();
-const port = 3000;
+const port = 3001;
+connectdb(process.env.MONGO_URL);
+app.use(cors());
+app.use(express.json());
 
-// Define a simple route
-app.get('/', (req, res) => {
-  res.send('Hello, this is your backend server!');
-});
-
-// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+    console.log(`server listening at http://localhost:${port}`);
+})
