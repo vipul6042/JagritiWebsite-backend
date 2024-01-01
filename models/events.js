@@ -11,13 +11,7 @@ const eventSchema = new mongoose.Schema({
         mobile: { type: Number, required: true }
     }],
     participants: [{
-        teamName: { type: String, required: true },
-        teamIcon: { type: String, required: true },
-        members: [{
-            type: mongoose.Types.ObjectId,
-            required: true,
-            ref: "User"
-        }]
+        type : mongoose.Types.ObjectId, ref : "Teams", required : true
     }]
 }, {
     timestamps: true,
