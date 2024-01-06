@@ -10,19 +10,37 @@ const userSchema = new mongoose.Schema({
     gender: { type: String },
     nationality: { type: String },
     event: [{
-        type: mongoose.Types.ObjectId,
-        required: true,
-        ref: "Event"
+        eventName: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "Event"
+        },
+        status : {
+            type : String,
+            required : true
+        }
     }],
     preEvents: [{
-        type: mongoose.Types.ObjectId,
-        required: true,
-        ref: "PreEvent"
+        eventName: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "PreEvent"
+        },
+        status: {
+            type: String,
+            required: true
+        }
     }],
     guestTalks: [{
-        type: mongoose.Types.ObjectId,
-        required: true,
-        ref: "GuestTalks"
+        eventName: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "GuestTalks"
+        },
+        status: {
+            type: String,
+            required: true
+        }
     }]
 })
 
