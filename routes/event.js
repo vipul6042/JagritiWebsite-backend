@@ -12,8 +12,8 @@ import { addEvent,
      getPreEvents, 
      updateEvent, 
      updateGuestTalks, 
-     updatePreEvent } from "../controls/event.js";
-eventrouter.route("/").get(getEvents)
+     updatePreEvent } from "../controllers/event.js";
+eventrouter.route("/event").get(getEvents)
 eventrouter.route("/preEvent").get(getPreEvents)
 eventrouter.route("/GuestTalks").get(getGuestTalks)
 
@@ -30,4 +30,4 @@ eventrouter.route("/deleteEvent/preEvents").delete(deletepreEvent)
 eventrouter.route("/deleteEvent/guestTalks").delete(deleteguestTalks)
 
 
-export  {eventrouter}
+export default eventrouter
