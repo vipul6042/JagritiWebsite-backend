@@ -9,14 +9,16 @@ const eventSchema = new mongoose.Schema({
     contacts: [{
         name: { type: String, required: true },
         mobile: { type: Number, required: true }
-    }],
+    }]
+    ,
     participants: {
         teams: {
             type: mongoose.Types.ObjectId, ref: "Teams", required: true
         },
-        individuals: {
-            type: mongoose
-        }
+        // individuals: {
+        //     type: mongoose.Types.ObjectId,
+        //     ref:""
+        // }
     }
 }, {
     timestamps: true,
