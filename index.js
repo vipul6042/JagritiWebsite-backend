@@ -9,7 +9,7 @@ import events from "./routes/event.js";
 
 dotenv.config();
 const app = express();
-const port = 3000;
+const port = 8000;
 connectdb(process.env.MONGO_URL);
 app.use(cors());
 app.use(express.json());
