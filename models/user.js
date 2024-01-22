@@ -7,8 +7,6 @@ const userSchema = new mongoose.Schema({
     college: { type: String },
     course: { type: String },
     year: { type: String },
-    gender: { type: String },
-    nationality: { type: String },
     admin : {type : Boolean},
     event: [{
         eventName: {
