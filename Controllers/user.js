@@ -49,9 +49,9 @@ export const checkEmail = async (req, res) => {
     const { email } = req.body;
     const user = await userModel.findOne({ email: email });
     if (user) {
-      res.status(200).send("User exists");
+      res.status(200).send({status:true});
     } else {
-      res.status(400).send("User does not exist");
+      res.status(400).send({status:false});
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
