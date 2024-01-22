@@ -12,7 +12,7 @@ import { addEvent,
      getPreEvents, 
      updateEvent, 
      updateGuestTalks, 
-     updatePreEvent } from "../controllers/event.js";
+     updatePreEvent } from "../Controllers/event.js";
 eventrouter.route("/event").get(getEvents)
 eventrouter.route("/preEvent").get(getPreEvents)
 eventrouter.route("/GuestTalks").get(getGuestTalks)
