@@ -4,7 +4,7 @@ import { addEvent, checkEmail, createuser, deleteEvent, deleteUserByEmail, getUs
 const router = express.Router();
 
 router.get('/getAllUser',getUser)
-router.get('/user',getAUser)
+router.post('/user',getAUser)
 router.post('/createUser',createuser)
 router.post('/checkUser',checkEmail)
 router.patch('/updateuser',updateUser)
