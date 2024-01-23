@@ -4,7 +4,7 @@ import { ObjectId } from "mongoose";
 /*CREATE */
 export const createuser = async (req, res) => {
   try {
-    const { name, mobile, email, college, course, year, gender, nationality } =
+    const { name, mobile, email, college, course, year} =
       req.body;
 
     const newUser = new userModel({
@@ -14,8 +14,6 @@ export const createuser = async (req, res) => {
       college,
       course,
       year,
-      gender,
-      nationality,
     });
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
@@ -49,9 +47,9 @@ export const checkEmail = async (req, res) => {
     const { email } = req.body;
     const user = await userModel.findOne({ email: email });
     if (user) {
-      res.status(200).send("User exists");
+      res.status(200).json(user);
     } else {
-      res.status(400).send("User does not exist");
+      res.status(400).send({status:false});
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
