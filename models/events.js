@@ -6,19 +6,21 @@ const eventSchema = new mongoose.Schema({
     imageURL: { type: String, required: true },
     overview: { type: String, required: true },
     status: { type: Boolean, required: true },
+    teamEvent: { type: Boolean, required: true },
     contacts: [{
         name: { type: String, required: true },
         mobile: { type: Number, required: true }
     }]
     ,
     participants: {
-        teams: {
+        teams: [{
             type: mongoose.Types.ObjectId, ref: "Teams", required: true
-        },
-        // individuals: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref:""
-        // }
+        }],
+        individuals: [{
+            type: mongoose.Types.ObjectId,
+            ref:"users",
+            required: true
+        }]
     }
 }, {
     timestamps: true,
