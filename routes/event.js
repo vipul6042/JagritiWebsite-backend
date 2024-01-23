@@ -16,6 +16,7 @@ import {
   updatePreEvent,
 } from "../controllers/event.js";
 
+
 eventrouter.post("/event", getEvents);
 eventrouter.post("/preEvent", getPreEvents);
 eventrouter.post("/GuestTalks", getGuestTalks);
@@ -32,4 +33,5 @@ eventrouter.post("/deleteEvent/events", deleteEvent);
 eventrouter.post("/deleteEvent/preEvents", deletepreEvent);
 eventrouter.post("/deleteEvent/guestTalks", deleteguestTalks);
 
-export default eventrouter;
+
+export default eventrouter
