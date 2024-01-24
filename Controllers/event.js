@@ -82,7 +82,7 @@ const updateEvent=async(req,resp)=>{
     resp.send({result:response})}
     catch(err){
         if(err){
-            resp.send({result:"Updation of Events Failed",success:false})
+            resp.send({err, result:"Updation of Events Failed",success:false})
 
         }
     }
@@ -126,21 +126,23 @@ const deleteEvent=async(req,resp)=>{
 }
 const deletepreEvent=async(req,resp)=>{
     try{
-        let response;
+        let response=await PreEventModel.findOneAndDelete({eventName:req.body.eventName});
+        resp.send({result:response});
     }
     catch(err){
         if(err){
-            resp.send({result:"Not Able to delete preEvent",success:true});
+            resp.send({result:"Not Able to delete Pre Event",success:true});
         }
     }
 }
 const deleteguestTalks=async(req,resp)=>{
     try{
-        
+        let response=await GuestTalksModel.findOneAndDelete({eventName:req.body.eventName});
+        resp.send({result:response});
     }
     catch(err){
         if(err){
-            resp.send({result:"Not Able to guestTalks Event",success:true});
+            resp.send({result:"Not Able to delete Guest Talk",success:true});
         }
     }
 }

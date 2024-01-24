@@ -42,6 +42,16 @@ export const getAUser=async(req,res)=>{
   }
 }
 
+export const getUserByID=async(req,res)=>{
+  try {
+    const {_id}=req.body
+    const user = await userModel.findOne({_id: _id});
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 export const checkEmail = async (req, res) => {
   try {
     const { email } = req.body;

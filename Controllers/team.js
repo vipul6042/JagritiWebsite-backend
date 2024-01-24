@@ -14,7 +14,7 @@ export const createTeam =async (req, res) => {
 // Get all teams
 export const getTeam = async (req, res) => {
   try {
-    const allTeams = await teamsModel.find().populate('teamLeader').populate('members.member');
+    const allTeams = await teamsModel.find();
     res.status(200).json(allTeams);
   } catch (error) {
     console.error(error);
@@ -25,7 +25,8 @@ export const getTeam = async (req, res) => {
 // Get a specific team by ID
 export const getTeamById = async (req, res) => {
   try {
-    const team = await teamsModel.findById(req.params.id).populate('teamLeader').populate('members.member');
+    const {_id}=req.body
+    const team = await teamsModel.findOne({_id: _id});
     if (!team) {
       return res.status(404).json({ error: 'Team not found' });
     }
@@ -39,11 +40,12 @@ export const getTeamById = async (req, res) => {
 // Update a team by ID
 export const updateTeamById = async (req, res) => {
   try {
-    const updatedTeam = await teamsModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    ).populate('teamLeader').populate('members.member');
+    const { _id, newData } = req.body;
+    const updatedTeam = await teamsModel.findOneAndUpdate(
+      { _id: _id },
+      { $set: newData },
+      { new: true }
+    );
     if (!updatedTeam) {
       return res.status(404).json({ error: 'Team not found' });
     }
@@ -57,13 +59,14 @@ export const updateTeamById = async (req, res) => {
 // Delete a team by ID
 export const deleteTeamById = async (req, res) => {
   try {
-    const deletedTeam = await teamsModel.findByIdAndDelete(req.params.id);
-    if (!deletedTeam) {
-      return res.status(404).json({ error: 'Team not found' });
+    const { _id } = req.body;
+    const deletedTeam = await teamsModel.findOneAndDelete({ _id: _id });
+    if (deletedTeam) {
+      res.status(200).send("Team deleted successfully");
+    } else {
+      res.status(404).send("Team not found");
     }
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
