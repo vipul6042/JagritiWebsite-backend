@@ -74,6 +74,37 @@ const addGuestTalks=async(req,resp)=>{
         }
     }
 }
+
+const getEventByID = async (req, res) => {
+    try {
+      const { _id } = req.body;
+      const event = await EventModel.findOne({ _id: _id });
+      res.status(200).json(event);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
+const getPreEventByID = async (req, res) => {
+    try {
+      const { _id } = req.body;
+      const preEvent = await PreEventModel.findOne({ _id: _id });
+      res.status(200).json(preEvent);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
+const getGuestTalkByID = async (req, res) => {
+    try {
+      const { _id } = req.body;
+      const guestTalk = await GuestTalksModel.findOne({ _id: _id });
+      res.status(200).json(guestTalk);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
 const updateEvent=async(req,resp)=>{
    try{ let {eventName,updatedBody}=req.body;
     let response=await EventModel.updateOne({eventName:eventName},{
@@ -146,4 +177,4 @@ const deleteguestTalks=async(req,resp)=>{
         }
     }
 }
-export {getEvents,getPreEvents,getGuestTalks,addEvent,addGuestTalks,addPreEvent,updateEvent,updatePreEvent,updateGuestTalks,deleteEvent,deletepreEvent,deleteguestTalks}
+export {getEvents,getPreEvents,getGuestTalks,addEvent,addGuestTalks,addPreEvent,getEventByID,getPreEventByID,getGuestTalkByID,updateEvent,updatePreEvent,updateGuestTalks,deleteEvent,deletepreEvent,deleteguestTalks}
