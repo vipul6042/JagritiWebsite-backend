@@ -8,11 +8,12 @@ const userSchema = new mongoose.Schema({
     course: { type: String },
     year: { type: String },
     admin : {type : Boolean},
-    event: [{
+    events: [{
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "Event"
+            ref: "Event",
+            unique:true
         },
         status: {
             type: String,
@@ -23,7 +24,8 @@ const userSchema = new mongoose.Schema({
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "PreEvent"
+            ref: "PreEvent",
+            unique:true
         },
         status: {
             type: String,
@@ -34,7 +36,8 @@ const userSchema = new mongoose.Schema({
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "GuestTalks"
+            ref: "GuestTalks",
+            unique:true
         },
         status: {
             type: String,

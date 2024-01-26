@@ -1,11 +1,10 @@
 import userModel from "../models/user.js";
 import { ObjectId } from "mongoose";
-// const { ObjectId } = require('mongodb'); 
+// const { ObjectId } = require('mongodb');
 /*CREATE */
 export const createuser = async (req, res) => {
   try {
-    const { name, mobile, email, college, course, year} =
-      req.body;
+    const { name, mobile, email, college, course, year } = req.body;
 
     const newUser = new userModel({
       name,
@@ -32,25 +31,25 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getAUser=async(req,res)=>{
+export const getAUser = async (req, res) => {
   try {
-    const {email}=req.body
-    const user = await userModel.findOne({email: email});
+    const { email } = req.body;
+    const user = await userModel.findOne({ email: email });
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+};
 
-export const getUserByID=async(req,res)=>{
+export const getUserByID = async (req, res) => {
   try {
-    const {_id}=req.body
-    const user = await userModel.findOne({_id: _id});
+    const { _id } = req.body;
+    const user = await userModel.findOne({ _id: _id });
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+};
 
 export const checkEmail = async (req, res) => {
   try {
@@ -59,7 +58,7 @@ export const checkEmail = async (req, res) => {
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(400).send({status:false});
+      res.status(400).send({ status: false });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -85,27 +84,50 @@ export const updateUser = async (req, res) => {
     res.status(404).json({ error: err.message });
   }
 };
+async function isEventNamePresent(user, eventType, eventIdToCheck) {
+  let eventArray;
+  switch (eventType) {
+    case "event":
+      eventArray = user.events;
+      break;
+    case "preEvent":
+      eventArray = user.preEvents;
+      break;
+    case "guestTalk":
+      eventArray = user.guestTalks;
+      break;
+    default:
+      return false; // Invalid event type
+  }
 
+  for (const event of eventArray) {
+    if (event.eventName.equals(eventIdToCheck)) {
+      return true; // Event name found in the array
+    }
+  }
+  return false; // Event name not found in the array
+}
 export const addEvent = async (req, res) => {
   const { email, eventType, eventName, status } = req.body;
-
   try {
     const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
+    if (await isEventNamePresent(user, eventType, eventName)) {
+      return res.status(400).json({ message: "already registered" });
+    }
     // Assuming you have separate arrays for each event type
     switch (eventType) {
       case "event":
-        user.event.push({ eventName, status });
+        user.events.push({ eventName, status });
         break;
       case "preEvent":
-        user.preEvents.push(eventName);
+        user.preEvents.push({ eventName, status });
         break;
       case "guestTalk":
-        user.guestTalks.push(eventName);
+        user.guestTalks.push({ eventName, status });
         break;
       default:
         return res.status(400).json({ message: "Invalid event type" });
@@ -135,7 +157,6 @@ export const deleteUserByEmail = async (req, res) => {
   }
 };
 
-
 export const deleteEvent = async (req, res) => {
   const { email, eventType, eventName } = req.body;
 
@@ -143,41 +164,40 @@ export const deleteEvent = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     let eventArray;
 
     switch (eventType) {
-      case 'event':
-        eventArray = user.event;
+      case "event":
+        eventArray = user.events;
         break;
-      case 'preEvent':
+      case "preEvent":
         eventArray = user.preEvents;
         break;
-      case 'guestTalk':
+      case "guestTalk":
         eventArray = user.guestTalks;
         break;
       default:
-        return res.status(400).json({ message: 'Invalid event type' });
+        return res.status(400).json({ message: "Invalid event type" });
     }
 
     const eventIndex = eventArray.findIndex((event) => {
-        const eventObjectIdAsString = event.eventName.toString();
-        return eventObjectIdAsString === eventName;
-      });
-      
+      const eventObjectIdAsString = event.eventName.toString();
+      return eventObjectIdAsString === eventName;
+    });
+
     if (eventIndex === -1) {
-      return res.status(404).json({ message: 'Event not found' });
+      return res.status(404).json({ message: "Event not found" });
     }
 
     eventArray.splice(eventIndex, 1);
     await user.save();
 
-    return res.status(200).json({ message: 'Event deleted successfully' });
+    return res.status(200).json({ message: "Event deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
