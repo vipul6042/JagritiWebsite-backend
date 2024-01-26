@@ -9,7 +9,10 @@ import { addEvent,
      deletepreEvent, 
      getEvents, 
      getGuestTalks, 
-     getPreEvents, 
+     getPreEvents,
+     getEventByID,
+     getPreEventByID,
+     getGuestTalkByID,
      updateEvent, 
      updateGuestTalks, 
      updatePreEvent } from "../Controllers/event.js";
@@ -20,6 +23,10 @@ eventrouter.route("/GuestTalks").get(getGuestTalks)
 eventrouter.route("/createEvent/addEvent").post(addEvent)
 eventrouter.route("/createEvent/addPreEvent").post(addPreEvent)
 eventrouter.route("/createEvent/addGuestTalks").post(addGuestTalks)
+
+eventrouter.route("/getEventByID").post(getEventByID)
+eventrouter.route("/getPreEventByID").post(getPreEventByID)
+eventrouter.route("/getGuestTalkByID").post(getGuestTalkByID)
 
 eventrouter.route("/updateEvent/events").put(updateEvent)
 eventrouter.route("/updateEvent/preEvents").put(updatePreEvent)

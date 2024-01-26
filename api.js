@@ -22,12 +22,12 @@ const getAllCA=`${hostLink}/ca/getAllCA`  //not created in ca routes
 
 /*USER APIS */
 const createNewUser=`${hostLink}/auth/createUser`
-const updateUser=`${hostLink}/auth/updateuser`
+const updateUser=`${hostLink}/auth/updateUser`
 const deleteUser=`${hostLink}/auth/deleteUser`
 const toCheckUserExist=`${hostLink}/auth/checkUser`
 
-const getEvents=`${hostLink}/admin/event`
-const getPreEvents=`${hostLink}/admin/preEvent`
+const getEvents=`${hostLink}/admin/events`
+const getPreEvents=`${hostLink}/admin/preEvents`
 const getGuestTalks=`${hostLink}/admin/GuestTalks`
 
 //to regiserter in event or gusetTalk or preEvent(change only in user modal)
