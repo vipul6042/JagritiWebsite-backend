@@ -1,6 +1,7 @@
 import express from "express";
 const userouter=express.Router();
 import userModel from "../models/user.js";
+
 userouter.get("/",async(req,resp)=>{
    try{
       let response=await userModel.find();
@@ -12,5 +13,7 @@ userouter.get("/",async(req,resp)=>{
     }
    }
 })
+
+
 
 export {userouter}
