@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/getallteam',getTeam)
 router.post('/team',getTeamById)
-router.patch('/updateTeamById',updateTeamById)
+router.put('/updateTeamById',updateTeamById)
 router.delete('/deleteteam',deleteTeamById)
 router.post('/createTeam',createTeam)
 

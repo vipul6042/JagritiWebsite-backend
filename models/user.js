@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
         },
         status: {
             type: String,
-            required: true
+            required: true,
+            default: "Pending"
         }
     }],
     preEvents: [{
@@ -29,7 +30,8 @@ const userSchema = new mongoose.Schema({
         },
         status: {
             type: String,
-            required: true
+            required: true,
+            default: "Pending"
         }
     }],
     guestTalks: [{
@@ -41,7 +43,8 @@ const userSchema = new mongoose.Schema({
         },
         status: {
             type: String,
-            required: true
+            required: true,
+            default: "Pending"
         }
     }]
 })

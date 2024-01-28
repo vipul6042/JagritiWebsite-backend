@@ -10,7 +10,7 @@ import {
 
 router.post("/createCA", createCA);
 router.get("/getCA", getCAByEmail);
-router.patch("/updateCA", updateCAByEmail);
+router.put("/updateCA", updateCAByEmail);
 router.delete("/deleteCA", deleteCAByEmail);
 router.get("/getAllCA", getAllCA);
 
