@@ -21,6 +21,7 @@ const eventSchema = new mongoose.Schema({
             ref:"users",
             required: true
         }],
+        driveUrl: { type: String, required: true},
         status: { type: String, required: true, default: "Pending"}
     }
 }, {
