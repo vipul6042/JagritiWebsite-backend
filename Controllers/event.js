@@ -44,7 +44,7 @@ const addEvent=async(req,resp)=>{
     }
     catch(err){
         if(err){
-            resp.send({result:"Error saving event",success:false})
+            resp.send({err, result:"Error saving event",success:false})
         }
     }
 }
