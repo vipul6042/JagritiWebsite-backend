@@ -20,7 +20,8 @@ const eventSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             ref:"users",
             required: true
-        }]
+        }],
+        status: { type: String, required: true, default: "Pending"}
     }
 }, {
     timestamps: true,
