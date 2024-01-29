@@ -1,5 +1,5 @@
 import express from "express";
-import { addEvent, checkEmail, createuser, deleteEvent, deleteUserByEmail, getUser, updateUser ,getAUser, getUserByID} from '../Controllers/user.js';
+import { addEvent, checkEmail, createuser, deleteEvent, deleteUserByEmail, getUser, updateUser, updateUserByID ,getAUser, getUserByID} from '../Controllers/user.js';
 import authAdmin from "../Controllers/admin.js";
 
 const router = express.Router();
@@ -10,6 +10,7 @@ router.post('/userByID',getUserByID)
 router.post('/createUser',createuser)
 router.post('/checkUser',checkEmail)
 router.put('/updateUser',updateUser)
+router.put('/updateUserByID',updateUserByID)
 router.delete('/deleteUser',deleteUserByEmail)
 router.post('/addEvent',addEvent)
 router.delete('/deleteEvent',deleteEvent)
