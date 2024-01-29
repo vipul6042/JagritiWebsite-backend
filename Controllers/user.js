@@ -87,9 +87,9 @@ export const updateUser = async (req, res) => {
 
 export const updateUserByID = async (req, res) => {
   try {
-    const { email, newData } = req.body;
+    const { _id, newData } = req.body;
     const updatedUser = await userModel.findOneAndUpdate(
-      { email: email },
+      { _id: _id },
       { $set: newData },
       { new: true }
     );
