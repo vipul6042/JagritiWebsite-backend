@@ -84,6 +84,26 @@ export const updateUser = async (req, res) => {
     res.status(404).json({ error: err.message });
   }
 };
+
+export const updateUserByID = async (req, res) => {
+  try {
+    const { email, newData } = req.body;
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email: email },
+      { $set: newData },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      res.status(200).send("User updated successfully");
+    } else {
+      res.status(404).send("User not found");
+    }
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
 async function isEventNamePresent(user, eventType, eventIdToCheck) {
   let eventArray;
   switch (eventType) {
