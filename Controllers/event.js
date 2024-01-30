@@ -177,4 +177,37 @@ const deleteguestTalks=async(req,resp)=>{
         }
     }
 }
-export {getEvents,getPreEvents,getGuestTalks,addEvent,addGuestTalks,addPreEvent,getEventByID,getPreEventByID,getGuestTalkByID,updateEvent,updatePreEvent,updateGuestTalks,deleteEvent,deletepreEvent,deleteguestTalks}
+
+const addParticipant=async(req,res)=>{
+    try{
+        const {eventName,eventType,teamid,driveUrl}=req.body
+        let event
+        if(eventType==="event"){
+            event=await EventModel.findOne({eventName:eventName})
+        }else if(eventType==="preEvent"){
+            event=await PreEventModel.findOne({eventName:eventName})
+        }else if(eventType==="guestTalk"){
+            event=await GuestTalksModel.findOne({eventName:eventName})
+        }else {
+            res.status(400).json({error:"invalid eventType"})
+        }
+        if(event.teamEvent){
+            if (event.participants.teams.includes(teamid)) {
+                return res.status(400).json({ error: "Team already registered" });
+            }
+            event.participants.teams.push(teamid)
+            event.participants.driveUrl.push(driveUrl)
+        }else{
+            if (event.participants.individuals.includes(teamid)) {
+                return res.status(400).json({ error: "Individual already registered" });
+            }
+            event.participants.individuals.push(teamid)
+            event.participants.driveUrl.push(driveUrl)
+        }
+        await event.save()
+        res.status(201).json(event)
+    }catch(err){
+        res.status(500).json({error:err})
+    }
+}
+export {getEvents,getPreEvents,getGuestTalks,addEvent,addGuestTalks,addPreEvent,getEventByID,getPreEventByID,getGuestTalkByID,updateEvent,updatePreEvent,updateGuestTalks,deleteEvent,deletepreEvent,deleteguestTalks,addParticipant}
