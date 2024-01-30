@@ -15,7 +15,8 @@ import { addEvent,
      getGuestTalkByID,
      updateEvent, 
      updateGuestTalks, 
-     updatePreEvent } from "../Controllers/event.js";
+     updatePreEvent, 
+     addParticipant} from "../Controllers/event.js";
 eventrouter.route("/events").get(getEvents)
 eventrouter.route("/preEvents").get(getPreEvents)
 eventrouter.route("/GuestTalks").get(getGuestTalks)
@@ -36,5 +37,6 @@ eventrouter.route("/deleteEvent/events").delete(deleteEvent)
 eventrouter.route("/deleteEvent/preEvents").delete(deletepreEvent)
 eventrouter.route("/deleteEvent/guestTalks").delete(deleteguestTalks)
 
+eventrouter.route("/registration").post(addParticipant)
 
 export default eventrouter
