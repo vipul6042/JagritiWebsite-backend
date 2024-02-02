@@ -7,23 +7,25 @@ const eventSchema = new mongoose.Schema({
     overview: { type: String, required: true },
     status: { type: Boolean, required: true },
     teamEvent: { type: Boolean, required: true },
+    timeline:{type:String},
     contacts: [{
         name: { type: String, required: true },
         mobile: { type: Number, required: true }
     }]
     ,
-    participants: {
-        teams: [{
-            type: mongoose.Types.ObjectId, ref: "Teams", required: true
-        }],
-        individuals: [{
+    participants: [{
+        teams: {
+            type: mongoose.Types.ObjectId, ref: "Teams",
+            //  required: true
+        },
+        individuals: {
             type: mongoose.Types.ObjectId,
             ref:"users",
-            required: true
-        }],
-        driveUrl: [{ type: String, required: true}],
+            // required: true
+        },
+        driveUrl: { type: String, required: true},
         status: { type: String, required: true, default: "Pending"}
-    }
+    }]
 }, {
     timestamps: true,
 });

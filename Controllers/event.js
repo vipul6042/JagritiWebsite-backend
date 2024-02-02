@@ -180,7 +180,7 @@ const deleteguestTalks=async(req,resp)=>{
 
 const addParticipant=async(req,res)=>{
     try{
-        const {eventName,eventType,teamid,driveUrl}=req.body
+        const {eventName,eventType,participant}=req.body
         let event
         if(eventType==="event"){
             event=await EventModel.findOne({eventName:eventName})
@@ -191,19 +191,7 @@ const addParticipant=async(req,res)=>{
         }else {
             res.status(400).json({error:"invalid eventType"})
         }
-        if(event.teamEvent){
-            if (event.participants.teams.includes(teamid)) {
-                return res.status(400).json({ error: "Team already registered" });
-            }
-            event.participants.teams.push(teamid)
-            event.participants.driveUrl.push(driveUrl)
-        }else{
-            if (event.participants.individuals.includes(teamid)) {
-                return res.status(400).json({ error: "Individual already registered" });
-            }
-            event.participants.individuals.push(teamid)
-            event.participants.driveUrl.push(driveUrl)
-        }
+        event.participants.push(participant)
         await event.save()
         res.status(201).json(event)
     }catch(err){
