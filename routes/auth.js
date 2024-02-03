@@ -1,5 +1,5 @@
 import express from "express";
-import { addEvent, checkEmail, createuser, deleteEvent, deleteUserByEmail, getUser, updateUser, updateUserByID ,getAUser, getUserByID} from '../Controllers/user.js';
+import { addEvent, checkEmail, createuser, deleteEvent, deleteUserByEmail, getUser, updateUser, updateUserByID ,getAUser, getUserByID, checkRegister} from '../Controllers/user.js';
 import authAdmin from "../Controllers/admin.js";
 
 const router = express.Router();
@@ -16,5 +16,7 @@ router.post('/addEvent',addEvent)
 router.delete('/deleteEvent',deleteEvent)
 
 router.post('/admin', authAdmin);
+
+router.post('/checkRegister',checkRegister)
 
 export default router;
