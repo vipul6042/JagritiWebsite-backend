@@ -14,7 +14,9 @@ const port = 8000;
 connectdb(process.env.MONGO_URL);
 app.use(cors());
 app.use(express.json());
-
+app.get("/",(req,resp)=>{
+    resp.send("Home working ,hello !!")
+})
 app.use('/auth', auth);
 // app.use('/admin', admin);
 app.use('/ca', ca);
