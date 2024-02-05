@@ -13,7 +13,9 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             required: true,
             ref: "Event",
-            unique:true
+            unique: function () {
+                return this.eventName !== null;
+            }
         },
         status: {
             type: String,
@@ -26,7 +28,9 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             required: true,
             ref: "PreEvent",
-            unique:true
+            unique: function () {
+                return this.eventName !== null;
+            }
         },
         status: {
             type: String,
@@ -39,7 +43,9 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             required: true,
             ref: "GuestTalks",
-            unique:true
+            unique: function () {
+                return this.eventName !== null;
+            }
         },
         status: {
             type: String,
