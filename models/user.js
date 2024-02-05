@@ -12,10 +12,7 @@ const userSchema = new mongoose.Schema({
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "Event",
-            unique: function () {
-                return this.eventName !== null;
-            }
+            ref: "Event"
         },
         status: {
             type: String,
@@ -27,10 +24,7 @@ const userSchema = new mongoose.Schema({
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "PreEvent",
-            unique: function () {
-                return this.eventName !== null;
-            }
+            ref: "PreEvent"
         },
         status: {
             type: String,
@@ -42,10 +36,7 @@ const userSchema = new mongoose.Schema({
         eventName: {
             type: mongoose.Types.ObjectId,
             required: true,
-            ref: "GuestTalks",
-            unique: function () {
-                return this.eventName !== null;
-            }
+            ref: "GuestTalks"
         },
         status: {
             type: String,
