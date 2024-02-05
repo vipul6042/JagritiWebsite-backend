@@ -67,6 +67,23 @@ export const checkEmail = async (req, res) => {
   }
 };
 
+export const checkRegister= async(req,res)=>{
+  const {email, eventType, eventName,}=req.body
+  try{
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "email not registered" });
+    }
+    if (await isEventNamePresent(user, eventType, eventName)) {
+      return res.status(400).json({ message: "already registered" });
+    }else{
+      res.status(200).json(user);
+    }
+  }catch(err){
+    res.status(404).json({ error: err.message });
+  }
+}
 /* UPDATE */
 export const updateUser = async (req, res) => {
   try {
