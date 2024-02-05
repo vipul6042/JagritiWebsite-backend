@@ -10,7 +10,7 @@ import teams from "./routes/teams.js"
 
 dotenv.config();
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 connectdb(process.env.MONGO_URL);
 app.use(cors());
 app.use(express.json());
