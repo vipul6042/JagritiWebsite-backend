@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
     eventName: { type: String, required: true },
-    link: { type: String, required: true },
+    link: { type: String },
     imageURL: { type: String, required: true },
     overview: { type: String, required: true },
     status: { type: Boolean, required: true },
