@@ -4,7 +4,7 @@ import { ObjectId } from "mongoose";
 /*CREATE */
 export const createuser = async (req, res) => {
   try {
-    const { name, mobile, email, college, course, year } = req.body;
+    const { name, mobile, email, college, course, year,imgUrl } = req.body;
 
     const newUser = new userModel({
       name,
@@ -13,6 +13,7 @@ export const createuser = async (req, res) => {
       college,
       course,
       year,
+      imgUrl,
     });
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);

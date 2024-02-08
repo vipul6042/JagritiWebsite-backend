@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true,unique:true },
     college: { type: String },
     course: { type: String },
+    imgUrl:{type:String},
     year: { type: String },
     admin : {type : Boolean},
     events: [{
