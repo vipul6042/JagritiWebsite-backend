@@ -4,7 +4,7 @@ const eventSchema = new mongoose.Schema({
     eventName: { type: String, required: true, unique: true },
     link: { type: String },
     imageURL: { type: String, required: true },
-    overview: { type: String, required: true },
+    overview: { type: String },
     status: { type: Boolean, required: true },
     teamEvent: { type: Boolean, required: true },
     timeline:{type:String},
